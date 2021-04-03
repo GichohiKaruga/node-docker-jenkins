@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: node:latest
+    container_name: node
+    env_file: .env
+    environment:
+      - MONGO_HOSTNAME=db
+    networks:
+      - "testnet"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+  db:
+    image: mongo:4.2-bionic
+    container_name: mongo
+    env_file: .env
+    networks:
+      - "testnet"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    volumes:
+      - dbdata:/data/db
+
+volumes:
+  dbdata:
+  node_modules:
+networks:
+  testnet:
