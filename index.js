@@ -22,13 +22,6 @@ const {
   PORT,
 } = process.env;
 
-/*
-const CONNECTION_URL =
-  "mongodb+srv://mern-user:qkf8q7pgq341N8M1@mern-cluster.zn9ea.mongodb.net/eventdata?retryWrites=true&w=majority" ||
-  process.env.CONNECTION_URL;
-const PORT = process.env.PORT || 5000;
-*/
-
 const CONNECTION_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
 
 mongoose
